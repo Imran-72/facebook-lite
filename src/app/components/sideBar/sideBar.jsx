@@ -12,7 +12,9 @@ const SideBar = () => {
             <li>Profile</li>
           </Link>
           <li>Message</li>
-          <li>Users</li>
+          <Link to="/users">
+            <li>Users</li>
+          </Link>
           <li>Music</li>
           <li>Settings</li>
         </ul>
