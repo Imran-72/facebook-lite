@@ -1,1 +1,2 @@
 export const SET_USERS = "USERS/SET_USERS";
+export const SET_USER_PROFILE = "USER/SET_USER_PROFILE";

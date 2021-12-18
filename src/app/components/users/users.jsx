@@ -1,39 +1,36 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
+import { UsersWrap } from "./usersWrap";
+import img from "../../../img/ava.png";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUsers } from "../../../redux/actions";
-
+import { setUser } from "../../../redux/actions";
 const Users = () => {
-  const dispatch = useDispatch();
   const users = useSelector((state) => state.usersR.users);
-
-  const handleGetUsers = () => {
-    return dispatch(getUsers());
-  };
+  const dispatch = useDispatch();
 
   return (
     <>
-      {users &&
-        users.map((item) => {
-          return (
-            <div style={{ display: "block" }}>
-              <img
-                src={
-                  item.photos.small === null
-                    ? "https://img2.freepng.ru/20180523/tha/kisspng-businessperson-computer-icons-avatar-clip-art-lattice-5b0508dc6a3a10.0013931115270566044351.jpg"
-                    : item.photos.small
-                }
-                alt="avatar"
-                width="100"
-              />
-              <p>{item.name}</p>
-            </div>
-          );
-        })}
-      <div>
-        <button onClick={handleGetUsers}>Get Users</button>
-      </div>
+      <UsersWrap>
+        {users &&
+          users.map((item) => {
+            return (
+              <Link
+                to={`/users/user/${item.id}`}
+                onClick={() => dispatch(setUser(item))}
+              >
+                <div>
+                  <img
+                    src={item.photos.small === null ? img : item.photos.small}
+                    alt="avatar"
+                    width="70"
+                  />
+                  <p>{item.name}</p>
+                </div>
+              </Link>
+            );
+          })}
+      </UsersWrap>
     </>
   );
 };

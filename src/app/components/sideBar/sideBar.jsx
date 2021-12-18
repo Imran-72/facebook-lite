@@ -1,10 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { S_SideBar } from "./s_sideBar";
+import { getUsers } from "../../../redux/actions";
+import { SideBarWrap } from "./sideBarWrap";
 
 const SideBar = () => {
+  const dispatch = useDispatch();
+
   return (
-    <S_SideBar>
+    <SideBarWrap>
       <h1 style={{ margin: 0 }}>SideBar</h1>
       <h3>
         <ul style={{ listStyleType: "none", padding: 0 }}>
@@ -13,13 +17,13 @@ const SideBar = () => {
           </Link>
           <li>Message</li>
           <Link to="/users">
-            <li>Users</li>
+            <li onClick={() => dispatch(getUsers())}>Users</li>
           </Link>
           <li>Music</li>
           <li>Settings</li>
         </ul>
       </h3>
-    </S_SideBar>
+    </SideBarWrap>
   );
 };
 

@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
-export const S_Header = styled.div`
+export const HeaderWrap = styled.div`
   background-color: #1877f2;
-  height: 50px;
+  height: 70px;
   text-align: center;
   box-sizing: border-box;
+  position: fixed;
+  width: 100%;
 `;
