@@ -1,10 +1,9 @@
-import * as axios from "axios";
+import axios from "axios";
 import React, { useState } from "react";
 
 const Users = () => {
   const [users, setUsers] = useState();
 
-  console.log("users", users);
   const getUsers = async () => {
     const response = await axios(
       "https://social-network.samuraijs.com/api/1.0/users?page=1&count=10"
