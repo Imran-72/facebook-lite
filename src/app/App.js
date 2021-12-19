@@ -11,8 +11,8 @@ function App() {
     <>
       <div className="d-flex">
         <SideBar />
-        <Route path="/profile" component={Profile} />
-        <Route path="/users/user/:userId?" exact component={User} />
+        <Route path="/profile" exact component={Profile} />
+        <Route path="/user/:userId?" component={User} />
         <Route path="/users" exact component={Users} />
         <Header />
       </div>

@@ -19,9 +19,6 @@ const Profile = () => {
             <li>
               <b>Возраст:</b> 34 года
             </li>
-            <li>
-              <b>Профессия:</b> Певец
-            </li>
           </ul>
         </div>
       </ProfileWrap>
