@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { ProfileWrap } from "../../profile/profileWrap";
 import img from "../../../../img/ava.png";
+import { useParams } from "react-router-dom";
 
 const User = () => {
   let user = useSelector((state) => state.profUserR.user);
@@ -9,6 +10,9 @@ const User = () => {
   if (!user.name) {
     window.location.replace("http://localhost:3000/");
   }
+
+  const params = useParams();
+  console.log(params.userId);
 
   return (
     <ProfileWrap>

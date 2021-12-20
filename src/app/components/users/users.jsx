@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/actions";
 import Pagination from "../../common/pagination";
 import { paginate } from "../../utils/paginate";
+
 const Users = () => {
   const users = useSelector((state) => state.usersR.users);
   const dispatch = useDispatch();

@@ -1,4 +1,9 @@
-import { SET_USERS, SET_USER_PROFILE } from "./types";
+import {
+  SET_CURRENT_PAGE,
+  SET_USERS,
+  SET_USERS_COUNT,
+  SET_USER_PROFILE,
+} from "./types";
 
 export function setUser(data) {
   return {
@@ -7,11 +12,21 @@ export function setUser(data) {
   };
 }
 
-export function getUsers() {
+export const setCurrentPage = (currentPage) => ({
+  type: SET_CURRENT_PAGE,
+  payload: currentPage,
+});
+
+export const setUsersCount = (usersCount) => ({
+  type: SET_USERS_COUNT,
+  payload: usersCount,
+});
+
+export function getUsers(currentPage, usersCount) {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        "https://social-network.samuraijs.com/api/1.0/users?page=2&count=20"
+        `https://social-network.samuraijs.com/api/1.0/users?page=${(currentPage = 1)}&count=${(usersCount = 20)}`
       );
       const data = await response.json();
 
