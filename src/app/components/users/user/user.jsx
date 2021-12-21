@@ -18,7 +18,7 @@ const User = () => {
     <ProfileWrap>
       <div className="d-flex m-2">
         <img
-          src={user.photos.small === null ? img : user.photos.small}
+          src={user.photos.large === null ? img : user.photos.large}
           alt="avatar"
           width="300"
           height="300"

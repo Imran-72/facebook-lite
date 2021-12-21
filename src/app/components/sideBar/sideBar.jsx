@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUsers } from "../../../redux/actions";
@@ -6,6 +7,7 @@ import { SideBarWrap } from "./sideBarWrap";
 
 const SideBar = () => {
   const dispatch = useDispatch();
+  const currentPage = useSelector((state) => state.usersR.currentPage);
 
   return (
     <SideBarWrap>
@@ -17,7 +19,7 @@ const SideBar = () => {
           </Link>
           <li>Message</li>
           <Link to="/users">
-            <li onClick={() => dispatch(getUsers())}>Users</li>
+            <li onClick={() => dispatch(getUsers(currentPage))}>Users</li>
           </Link>
           <li>Music</li>
           <li>Settings</li>

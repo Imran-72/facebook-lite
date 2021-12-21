@@ -1,8 +1,10 @@
 import {
+  HIDE_LOADER,
   SET_CURRENT_PAGE,
   SET_USERS,
   SET_USERS_COUNT,
   SET_USER_PROFILE,
+  SHOW_LOADER,
 } from "./types";
 
 export function setUser(data) {
@@ -17,20 +19,31 @@ export const setCurrentPage = (currentPage) => ({
   payload: currentPage,
 });
 
-export const setUsersCount = (usersCount) => ({
-  type: SET_USERS_COUNT,
-  payload: usersCount,
+export const showLoader = () => ({
+  type: SHOW_LOADER,
 });
 
-export function getUsers(currentPage, usersCount) {
+export const hideLoader = () => ({
+  type: HIDE_LOADER,
+});
+
+export function getUsers(currentPage, pageSize) {
   return async (dispatch) => {
     try {
+      dispatch(showLoader());
+
       const response = await fetch(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${(currentPage = 1)}&count=${(usersCount = 20)}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${(pageSize = 5)}`
       );
-      const data = await response.json();
 
       if (!response.ok) throw new Error("Ошибка запроса");
+
+      const data = await response.json();
+
+      dispatch({
+        type: SET_USERS_COUNT,
+        payload: data.totalCount,
+      });
 
       dispatch({
         type: SET_USERS,
@@ -38,6 +51,8 @@ export function getUsers(currentPage, usersCount) {
       });
     } catch (e) {
       console.log(e);
+    } finally {
+      dispatch(hideLoader());
     }
   };
 }

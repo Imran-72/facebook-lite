@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
+import { appReducer } from "./appReducer";
 import { profileUserReducer } from "./profileUserReducer";
 import { usersReducer } from "./usersReducer";
 
 const rootReducer = combineReducers({
   usersR: usersReducer,
   profUserR: profileUserReducer,
+  loaderR: appReducer,
 });
 
 export const store = createStore(
