@@ -7,7 +7,6 @@ const Paginator = ({
   onPageChanged,
   portionSize = 10,
 }) => {
-  console.log("currentPage", currentPage);
   let pagesCount = Math.ceil(usersCount / pageSize);
 
   let pages = [];
@@ -45,7 +44,7 @@ const Paginator = ({
               >
                 <a
                   className="page-link"
-                  onClick={(e) => {
+                  onClick={() => {
                     onPageChanged(p);
                   }}
                 >

@@ -1,27 +1,29 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { UsersWrap } from "./usersWrap";
-import img from "../../../img/ava.png";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getUsers, setUser } from "../../../redux/actions";
-import Pagination from "../../common/pagination";
 import { paginate } from "../../utils/paginate";
 import Paginator from "../../common/paginator";
+import { useEffect } from "react";
+import User from "./user/user";
 
 const Users = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.usersR.users);
-  // const currentPage = useSelector((state) => state.usersR.currentPage);
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = useSelector((state) => state.usersR.pageSize);
-  const usersCount = useSelector((state) => state.usersR.usersCount);
+  const { users, currentPage, pageSize, usersCount } = useSelector(
+    (state) => state.usersR
+  );
   const loading = useSelector((state) => state.loaderR.loading);
+  const [activeBtn, setActiveBtn] = useState(1);
 
   const handlePageChange = (pageIndex) => {
-    setCurrentPage(pageIndex);
     dispatch(getUsers(pageIndex));
+    setActiveBtn(pageIndex);
   };
+
+  useEffect(() => {
+    dispatch(getUsers(currentPage));
+  }, []);
 
   const usersCrop = paginate(users, currentPage, pageSize);
   return (
@@ -35,24 +37,18 @@ const Users = () => {
           <>
             {usersCrop.map((item) => {
               return (
-                <Link
-                  to={`/user/${item.id}`}
-                  onClick={() => dispatch(setUser(item))}
-                >
-                  <div>
-                    <img
-                      src={item.photos.small === null ? img : item.photos.small}
-                      alt="avatar"
-                      width="70"
-                    />
-                    <p>{item.name}</p>
-                  </div>
-                </Link>
+                <div onClick={() => dispatch(setUser(item))}>
+                  <User
+                    photo={item.photos.large}
+                    name={item.name}
+                    id={item.id}
+                  />
+                </div>
               );
             })}
             <Paginator
               usersCount={usersCount}
-              currentPage={currentPage}
+              currentPage={activeBtn}
               onPageChanged={handlePageChange}
               pageSize={pageSize}
             />
