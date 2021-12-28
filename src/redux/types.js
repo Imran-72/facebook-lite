@@ -4,3 +4,7 @@ export const SET_CURRENT_PAGE = "USER/SET_CURRENT_PAGE";
 export const SET_USERS_COUNT = "USER/SET_USERS_COUNT";
 export const SHOW_LOADER = "USER/SHOW_LOADER";
 export const HIDE_LOADER = "USER/HIDE_LOADER";
+export const FOLLOW = "USER/FOLLOW";
+export const UNFOLLOW = "USER/UNFOLLOW";
+export const SET_USER_DATA = "USER/SET_USER_DATA";
+export const GET_USER_DATA = "USER/GET_USER_DATA";

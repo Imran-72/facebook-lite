@@ -1,12 +1,25 @@
-import axios from "axios";
+import httpServise from "../app/services/httpServices";
 import {
+  FOLLOW,
   HIDE_LOADER,
   SET_CURRENT_PAGE,
   SET_USERS,
   SET_USERS_COUNT,
+  SET_USER_DATA,
   SET_USER_PROFILE,
   SHOW_LOADER,
+  UNFOLLOW,
 } from "./types";
+
+export function setAuthUserData(userId, email, login, isAuth) {
+  return { type: SET_USER_DATA, payload: { userId, email, login, isAuth } };
+}
+
+// export function getAuthUserData(){
+//   return (dispatch)=>{
+
+//   }
+// }
 
 export function setUsers(data) {
   return {
@@ -42,13 +55,28 @@ export const hideLoader = () => ({
   type: HIDE_LOADER,
 });
 
-export function getUsers(currentPage = 1, pageSize = 5) {
-  console.log("currentPage", currentPage);
+export function follow(userId) {
   return async (dispatch) => {
     try {
-      dispatch(showLoader());
-      const { data } = await axios.get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`
+      const { data } = await httpServise.post(`follow/${userId}`, {}, {});
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export const unfollow = (id) => ({
+  action: UNFOLLOW,
+  userId: id,
+});
+
+export function getUsers(currentPage = 1, pageSize = 5) {
+  return async (dispatch) => {
+    dispatch(showLoader());
+    try {
+      const { data } = await httpServise.get(
+        `users?page=${currentPage}&count=${pageSize}`
       );
       dispatch(setUsersCount(data.totalCount));
       dispatch(setUsers(data.items));

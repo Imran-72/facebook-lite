@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import img from "../../../../img/ava.png";
+import { follow } from "../../../../redux/actions";
 
 const User = ({ photo, name, id }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <Link to={`/userProfile/${id}`}>
@@ -11,6 +14,14 @@ const User = ({ photo, name, id }) => {
           <p>Имя: {name}</p>
         </div>
       </Link>
+      <div>
+        <button
+          className="btn btn-primary mb-2"
+          onClick={() => dispatch(follow(id))}
+        >
+          FOLLOW
+        </button>
+      </div>
     </>
   );
 };

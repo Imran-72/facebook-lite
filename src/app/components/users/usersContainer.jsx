@@ -8,7 +8,7 @@ import Paginator from "../../common/paginator";
 import { useEffect } from "react";
 import User from "./user/user";
 
-const Users = () => {
+const UsersContainer = () => {
   const dispatch = useDispatch();
   const { users, currentPage, pageSize, usersCount } = useSelector(
     (state) => state.usersR
@@ -59,4 +59,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersContainer;
