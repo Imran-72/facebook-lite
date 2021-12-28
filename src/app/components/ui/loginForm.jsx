@@ -5,7 +5,7 @@ import TextField from "../../common/form/textField";
 
 const LoginForm = () => {
   const [data, setData] = useState({ email: "", password: "" });
-  const [s, setErrors] = useState();
+  const [errors, setErrors] = useState({});
 
   const handleChange = ({ target }) => {
     setData((prev) => ({
@@ -44,6 +44,7 @@ const LoginForm = () => {
         name="email"
         value={data.email}
         onChange={handleChange}
+        error={errors.email}
       />
       <TextField
         label="Пароль"
@@ -51,6 +52,7 @@ const LoginForm = () => {
         name="password"
         value={data.password}
         onChange={handleChange}
+        error={errors.password}
       />
       <CheckBoxField onChange={handleChange} value={data.stayOn} name="stayOn">
         Оставаться в системе
