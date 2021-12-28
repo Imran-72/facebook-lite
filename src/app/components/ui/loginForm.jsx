@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import CheckBoxField from "../../common/form/checkBoxField";
 import TextField from "../../common/form/textField";
+import { validator } from "../../utils/validator";
 
 const LoginForm = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -14,17 +15,38 @@ const LoginForm = () => {
     }));
   };
 
+  const validatorConfig = {
+    email: {
+      isRequared: {
+        message: "Электронная почта обязательна для заполнения",
+      },
+      isEmail: {
+        message: "Email введён не корректно",
+      },
+    },
+    password: {
+      isRequared: {
+        message: "Пароль обязателен для заполнения",
+      },
+      isCapitalSymbol: {
+        message: "Пароль должен содержать хотя бы одну заглавную букву",
+      },
+      isContainDigit: {
+        message: "Пароль должен содержать хотя бы одну цифру",
+      },
+      min: {
+        message: "Пароль должен состоять минимум из 8 символов",
+        value: 8,
+      },
+    },
+  };
   useEffect(() => {
     validate();
   }, [data]);
 
   const validate = () => {
-    const errors = {};
-    for (const fieldName in data) {
-      if (data[fieldName].trim() === "") {
-        errors[fieldName] = `${fieldName} is requared`;
-      }
-    }
+    const errors = validator(data, validatorConfig);
+
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
