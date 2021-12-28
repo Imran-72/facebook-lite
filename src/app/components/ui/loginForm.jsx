@@ -51,6 +51,7 @@ const LoginForm = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const isValid = Object.keys(errors).length === 0;
   const handleSubmit = (e) => {
     e.preventDefault();
     const isValid = validate();
@@ -79,7 +80,11 @@ const LoginForm = () => {
       <CheckBoxField onChange={handleChange} value={data.stayOn} name="stayOn">
         Оставаться в системе
       </CheckBoxField>
-      <button className="btn btn-primary mt-2" type="submit">
+      <button
+        className="btn btn-primary mt-2"
+        type="submit"
+        disabled={!isValid}
+      >
         Submit
       </button>
     </form>
