@@ -1,3 +1,4 @@
+import axios from "axios";
 import httpServise from "../app/services/httpServices";
 import {
   FOLLOW,
@@ -11,15 +12,28 @@ import {
   UNFOLLOW,
 } from "./types";
 
+const http = axios.create({
+  withCredentials: true,
+  baseURL: "https://social-network.samuraijs.com/api/1.0/",
+});
+
 export function setAuthUserData(userId, email, login, isAuth) {
   return { type: SET_USER_DATA, payload: { userId, email, login, isAuth } };
 }
 
-// export function getAuthUserData(){
-//   return (dispatch)=>{
-
-//   }
-// }
+export function getAuthUserData() {
+  return async (dispatch) => {
+    try {
+      const { data } = await http.get(`auth/me`);
+      dispatch({
+        type: SET_USER_DATA,
+        payload: data.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export function setUsers(data) {
   return {
@@ -57,6 +71,7 @@ export const hideLoader = () => ({
 
 export function follow(userId) {
   return async (dispatch) => {
+    console.log(userId);
     try {
       const { data } = await httpServise.post(`follow/${userId}`, {}, {});
       console.log(data);
