@@ -14,11 +14,35 @@ import {
 
 const http = axios.create({
   withCredentials: true,
+  headers: { "API-KEY": "fc78ffee-d447-4b9a-b481-18f5fb9e7074" },
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
 });
 
 export function setAuthUserData(userId, email, login, isAuth) {
   return { type: SET_USER_DATA, payload: { userId, email, login, isAuth } };
+}
+
+export function getUserStatus(userId) {
+  return async (dispatch) => {
+    try {
+      const { data } = await http.get(`profile/status/${userId}`);
+      console.log("status", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateUserStatus(status) {
+  console.log(status);
+  return async () => {
+    try {
+      const { data } = await http.put(`profile/status/`, { status: status });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function getAuthUserData() {

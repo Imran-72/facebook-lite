@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { SideBarWrap } from "./sideBarWrap";
 
-const SideBar = () => {
+const NavBar = () => {
   return (
     <SideBarWrap>
       <ul style={{ listStyleType: "none", padding: 0 }}>
@@ -13,9 +13,6 @@ const SideBar = () => {
         <Link to="/users">
           <li>Users</li>
         </Link>
-        <Link to="/login">
-          <li>RegisterForm</li>
-        </Link>
         <li>Music</li>
         <li>Settings</li>
       </ul>
@@ -23,4 +20,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default NavBar;

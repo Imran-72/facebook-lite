@@ -3,36 +3,38 @@ import { useDispatch } from "react-redux";
 import { HeaderWrap } from "./headerWrap";
 import { login, logout } from "../../../redux/actions";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { isAuth } = useSelector((state) => state.authR);
+
   return (
     <HeaderWrap>
       <h1 style={{ margin: 0 }}>Facebook Lite</h1>
-      <Link
-        to="/login"
-        style={{ textDecoration: "none", color: "white", padding: 0 }}
-      >
+      <div className="mx-2">
         {isAuth ? (
           <div
             className="d-flex justify-content-end"
             role="button"
             onClick={() => dispatch(logout())}
           >
-            logout
+            Logout
           </div>
         ) : (
-          <div
-            className="d-flex justify-content-end"
-            role="button"
-            onClick={() => dispatch(login())}
-          >
-            login
-          </div>
+          <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
+            <div
+              className="d-flex justify-content-end"
+              role="button"
+              onClick={() => dispatch(login())}
+            >
+              Login
+            </div>
+          </Link>
         )}
-      </Link>
+      </div>
     </HeaderWrap>
   );
 };
