@@ -1,15 +1,15 @@
 import axios from "axios";
 import httpServise from "../app/services/httpServices";
 import {
-  FOLLOW,
+  // FOLLOW,
   HIDE_LOADER,
-  SET_CURRENT_PAGE,
+  // SET_CURRENT_PAGE,
   SET_USERS,
   SET_USERS_COUNT,
   SET_USER_DATA,
   SET_USER_PROFILE,
   SHOW_LOADER,
-  UNFOLLOW,
+  // UNFOLLOW,
 } from "./types";
 
 const http = axios.create({
@@ -25,10 +25,34 @@ export function getAuthUserData() {
   return async (dispatch) => {
     try {
       const { data } = await http.get(`auth/me`);
-      dispatch({
-        type: SET_USER_DATA,
-        payload: data.data,
+      const { id, email, login } = data.data;
+      dispatch(setAuthUserData(id, email, login, true));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function login({ email, password, rememberMe = true }) {
+  return async (dispatch) => {
+    try {
+      await http.post(`auth/login`, {
+        email,
+        password,
+        rememberMe,
       });
+      dispatch(getAuthUserData());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function logout() {
+  return async (dispatch) => {
+    try {
+      await http.delete(`auth/login`);
+      dispatch(setAuthUserData(null, null, null, false));
     } catch (error) {
       console.log(error);
     }
@@ -56,10 +80,10 @@ export function setUsersCount(usersCount) {
   };
 }
 
-export const setCurrentPage = (currentPage) => ({
-  type: SET_CURRENT_PAGE,
-  payload: currentPage,
-});
+// export const setCurrentPage = (currentPage) => ({
+//   type: SET_CURRENT_PAGE,
+//   payload: currentPage,
+// });
 
 export const showLoader = () => ({
   type: SHOW_LOADER,
@@ -69,22 +93,22 @@ export const hideLoader = () => ({
   type: HIDE_LOADER,
 });
 
-export function follow(userId) {
-  return async (dispatch) => {
-    console.log(userId);
-    try {
-      const { data } = await httpServise.post(`follow/${userId}`, {}, {});
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
+// export function follow(userId) {
+//   return async (dispatch) => {
+//     console.log(userId);
+//     try {
+//       const { data } = await httpServise.post(`follow/${userId}`, {}, {});
+//       console.log(data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
 
-export const unfollow = (id) => ({
-  action: UNFOLLOW,
-  userId: id,
-});
+// export const unfollow = (id) => ({
+//   action: UNFOLLOW,
+//   userId: id,
+// });
 
 export function getUsers(currentPage = 1, pageSize = 5) {
   return async (dispatch) => {

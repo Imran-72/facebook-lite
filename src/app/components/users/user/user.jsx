@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import img from "../../../../img/ava.png";
-import { follow } from "../../../../redux/actions";
+// import { follow } from "../../../../redux/actions";
 
 const User = ({ photo, name, id }) => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const User = ({ photo, name, id }) => {
       <div>
         <button
           className="btn btn-primary mb-2"
-          onClick={() => dispatch(follow(id))}
+          // onClick={() => dispatch(follow(id))}
         >
           FOLLOW
         </button>

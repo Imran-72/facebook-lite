@@ -1,26 +1,18 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { getAuthUserData } from "../../../redux/actions";
+import { login } from "../../../redux/actions";
 // import CheckBoxField from "../../common/form/checkBoxField";
 import TextField from "../../common/form/textField";
-import httpServise from "../../services/httpServices";
 import { validator } from "../../utils/validator";
 import { UsersWrap } from "../users/usersWrap";
+import { FormWrapper } from "./formWrapper";
 
-// const http = axios.create({
-//   withCredentials: true,
-//   baseURL: "https://social-network.samuraijs.com/api/1.0/",
-// });
 const LoginForm = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState({ email: "", password: "" });
-  // const [myId, setMyId] = useState(null);
 
-  const { email, password } = data;
-  const [rememberMe, setRememberMe] = useState(true);
   const [errors, setErrors] = useState({});
 
   const handleChange = ({ target }) => {
@@ -29,28 +21,6 @@ const LoginForm = () => {
       [target.name]: target.value,
     }));
   };
-
-  // const setAuthUserData = async () => {
-  //   try {
-  //     const { data } = await httpServise.post(`auth/login`, {
-  //       email,
-  //       password,
-  //       rememberMe,
-  //     });
-  //     setMyId(data.data.userId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const getAuthUserData = async () => {
-  //   try {
-  //     const { data } = await http.get(`auth/me`);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const validatorConfig = {
     email: {
@@ -98,10 +68,11 @@ const LoginForm = () => {
 
   return (
     <UsersWrap>
-      <div style={{ position: "absolute", left: "210px" }}>
+      <div style={{ position: "absolute", left: "50px" }}>
         <div className="container mt-5">
           <div className="row">
-            <div className="col-md-15 offset-md-3 shadow p-4">
+            <div className="col-md-12 offset-md-3 shadow p-4">
+              <h3 className="mb-4">Login</h3>
               <form onSubmit={handleSubmit}>
                 <TextField
                   label="Электронная почта"
@@ -128,10 +99,11 @@ const LoginForm = () => {
                 </CheckBoxField> */}
                 <Link to="/profile">
                   <button
-                    className="btn btn-primary mt-2"
+                    className="btn btn-primary w-100 mx-auto"
                     type="submit"
                     disabled={!isValid}
-                    onClick={() => dispatch(getAuthUserData(data))}
+                    // onClick={() => dispatch(getAuthUserData(data))}
+                    onClick={() => dispatch(login(data))}
                   >
                     Submit
                   </button>

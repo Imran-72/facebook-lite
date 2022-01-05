@@ -4,7 +4,7 @@ const initialState = {
   user: {},
 };
 
-export const profileUserReducer = (state = initialState, action) => {
+export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_PROFILE:
       return { user: (state.user = action.payload) };

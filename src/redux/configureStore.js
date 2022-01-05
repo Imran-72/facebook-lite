@@ -2,12 +2,12 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { appReducer } from "./appReducer";
 import { authReducer } from "./authReducer";
-import { profileUserReducer } from "./profileUserReducer";
+import { profileReducer } from "./profileReducer";
 import { usersReducer } from "./usersReducer";
 
 const rootReducer = combineReducers({
   usersR: usersReducer,
-  profUserR: profileUserReducer,
+  profUserR: profileReducer,
   loaderR: appReducer,
   authR: authReducer,
 });
