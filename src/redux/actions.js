@@ -3,6 +3,8 @@ import httpServise from "../app/services/httpServices";
 import {
   // FOLLOW,
   HIDE_LOADER,
+  SET_MY_PROFILE,
+  SET_STATUS,
   // SET_CURRENT_PAGE,
   SET_USERS,
   SET_USERS_COUNT,
@@ -26,7 +28,10 @@ export function getUserStatus(userId) {
   return async (dispatch) => {
     try {
       const { data } = await http.get(`profile/status/${userId}`);
-      console.log("status", data);
+      dispatch({
+        type: SET_STATUS,
+        payload: data,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -34,11 +39,23 @@ export function getUserStatus(userId) {
 }
 
 export function updateUserStatus(status) {
-  console.log(status);
   return async () => {
     try {
-      const { data } = await http.put(`profile/status/`, { status: status });
-      console.log(data);
+      await http.put(`profile/status/`, { status: status });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getMyProfile(userId) {
+  return async (dispatch) => {
+    try {
+      const { data } = await http.get(`/profile/${userId}`);
+      dispatch({
+        type: SET_MY_PROFILE,
+        payload: data,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +67,7 @@ export function getAuthUserData() {
     try {
       const { data } = await http.get(`auth/me`);
       const { id, email, login } = data.data;
+      dispatch(getMyProfile(id));
       dispatch(setAuthUserData(id, email, login, true));
     } catch (error) {
       console.log(error);

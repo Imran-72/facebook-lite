@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { UsersWrap } from "./usersWrap";
 import { useDispatch } from "react-redux";
-import { getUsers, setUser } from "../../../redux/actions";
-import { paginate } from "../../utils/paginate";
-import Paginator from "../../common/paginator";
+import { getUsers, setUser } from "../../../../redux/actions";
+import { paginate } from "../../../utils/paginate";
+import Paginator from "../../common";
 import { useEffect } from "react";
-import User from "./user/user";
+import User from "../userPage/user";
 
 const UsersContainer = () => {
   const dispatch = useDispatch();

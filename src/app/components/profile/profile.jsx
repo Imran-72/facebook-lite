@@ -8,10 +8,12 @@ import { updateUserStatus } from "../../../redux/actions";
 const Profile = () => {
   const dispatch = useDispatch();
   const [status, setStatus] = useState("");
-  const { login, userId } = useSelector((state) => state.authR);
+  const { login } = useSelector((state) => state.authR);
+  const { fullName } = useSelector((state) => state.profR.myProfile);
 
   useEffect(() => {
-    dispatch(getUserStatus(userId));
+    // dispatch(getUserStatus(userId));
+    // dispatch(getMyProfile(userId));
   }, []);
   return (
     <ProfileWrap>
@@ -25,8 +27,9 @@ const Profile = () => {
               height="300"
             />
             <ul style={{ listStyleType: "none" }}>
-              <li>{login}</li>
+              <li>{fullName}</li>
               <li>22 года</li>
+              <li>{status}</li>
             </ul>
           </div>
           <div>

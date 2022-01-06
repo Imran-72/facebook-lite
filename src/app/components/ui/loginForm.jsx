@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import { login } from "../../../redux/actions";
-// import CheckBoxField from "../../common/form/checkBoxField";
-import TextField from "../../common/form/textField";
+import TextField from "../common/form";
 import { validator } from "../../utils/validator";
-import { UsersWrap } from "../users/usersWrap";
-import { FormWrapper } from "./formWrapper";
+import { UsersWrap } from "../../components/page/usersListPage/usersWrap";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

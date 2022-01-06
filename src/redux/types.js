@@ -8,3 +8,5 @@ export const FOLLOW = "USER/FOLLOW";
 export const UNFOLLOW = "USER/UNFOLLOW";
 export const SET_USER_DATA = "USER/SET_USER_DATA";
 export const GET_USER_DATA = "USER/GET_USER_DATA";
+export const SET_MY_PROFILE = "SET_MY_PROFILE";
+export const SET_STATUS = "SET_STATUS";

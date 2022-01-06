@@ -1,12 +1,12 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import Login from "./auth/login";
-import Header from "./components/header/header";
+import Login from "./layout";
+import Header from "./components/header";
 import Profile from "./components/profile/profile";
-import User from "./components/users/user/user";
-import UserProfile from "./components/users/user/userProfile/userProfile";
-import UsersContainer from "./components/users/usersContainer";
-import NavBar from "./components/navBar/navBar";
+import User from "./components/page/userPage";
+import UserProfile from "./components/page/userPage/userProfile";
+import UsersContainer from "./components/page/usersListPage";
+import NavBar from "./components/ui/navBar";
 
 function App() {
   return (
