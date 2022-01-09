@@ -24,10 +24,19 @@ export function setAuthUserData(userId, email, login, isAuth) {
   return { type: SET_USER_DATA, payload: { userId, email, login, isAuth } };
 }
 
+export function setStatus(text) {
+  return {
+    type: SET_STATUS,
+    payload: text,
+  };
+}
+
 export function getUserStatus(userId) {
   return async (dispatch) => {
     try {
       const { data } = await http.get(`profile/status/${userId}`);
+      console.log(data);
+
       dispatch({
         type: SET_STATUS,
         payload: data,

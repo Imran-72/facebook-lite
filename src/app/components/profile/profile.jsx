@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getUserStatus } from "../../../redux/actions";
+import { getUserStatus, setStatus } from "../../../redux/actions";
 import { ProfileWrap } from "./profileWrap";
 import { updateUserStatus } from "../../../redux/actions";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const [status, setStatus] = useState("");
-  const { login } = useSelector((state) => state.authR);
-  const { fullName } = useSelector((state) => state.profR.myProfile);
+  const { login, userId } = useSelector((state) => state.authR);
+  const { myProfile, status } = useSelector((state) => state.profR);
 
   useEffect(() => {
-    // dispatch(getUserStatus(userId));
+    dispatch(getUserStatus(userId));
     // dispatch(getMyProfile(userId));
-  }, []);
+  }, [myProfile]);
   return (
     <ProfileWrap>
       {login ? (
@@ -27,7 +26,7 @@ const Profile = () => {
               height="300"
             />
             <ul style={{ listStyleType: "none" }}>
-              <li>{fullName}</li>
+              <li>{myProfile.fullName}</li>
               <li>22 года</li>
               <li>{status}</li>
             </ul>
@@ -35,8 +34,8 @@ const Profile = () => {
           <div>
             <input
               type="text"
-              value={status}
-              onChange={({ target }) => setStatus(target.value)}
+              value={status && ""}
+              onChange={({ target }) => dispatch(setStatus(target.value))}
             />
             <div>
               <button
