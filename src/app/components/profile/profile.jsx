@@ -1,55 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { getUserStatus, setStatus } from "../../../redux/actions";
+import React from "react";
 import { ProfileWrap } from "./profileWrap";
-import { updateUserStatus } from "../../../redux/actions";
+import ProfileStatus from "./profileStatus/profileStatus";
 
-const Profile = () => {
-  const dispatch = useDispatch();
-  const { login, userId } = useSelector((state) => state.authR);
-  const { myProfile, status } = useSelector((state) => state.profR);
-
-  useEffect(() => {
-    dispatch(getUserStatus(userId));
-    // dispatch(getMyProfile(userId));
-  }, [myProfile]);
+const Profile = ({ myProfile, status }) => {
   return (
     <ProfileWrap>
-      {login ? (
-        <>
-          <div className="d-flex m-2">
-            <img
-              src="https://html5css.ru/w3images/avatar2.png"
-              alt="avatar"
-              width="300"
-              height="300"
-            />
-            <ul style={{ listStyleType: "none" }}>
-              <li>{myProfile.fullName}</li>
-              <li>22 года</li>
-              <li>{status}</li>
-            </ul>
-          </div>
-          <div>
-            <input
-              type="text"
-              value={status && ""}
-              onChange={({ target }) => dispatch(setStatus(target.value))}
-            />
-            <div>
-              <button
-                className="btn btn-primary m-4 "
-                onClick={() => dispatch(updateUserStatus(status))}
-              >
-                Добавить
-              </button>
-            </div>
-          </div>
-        </>
-      ) : (
-        <p>Вы не вошли в свой профиль</p>
-      )}
+      <>
+        <div className="d-flex m-2">
+          <img
+            src={`https://avatars.dicebear.com/api/avataaars/${(
+              Math.random() + 1
+            )
+              .toString(36)
+              .substring(7)}.svg`}
+            alt="avatar"
+            width="300"
+            height="300"
+            className="img-responsive rounded-circle"
+          />
+          <ul style={{ listStyleType: "none" }}>
+            <li>{myProfile.fullName}</li>
+            <li>22 года</li>
+          </ul>
+        </div>
+        <div>
+          <ProfileStatus status={status} />
+        </div>
+      </>
     </ProfileWrap>
   );
 };

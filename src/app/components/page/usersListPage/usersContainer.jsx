@@ -42,6 +42,7 @@ const UsersContainer = () => {
                     photo={item.photos.large}
                     name={item.name}
                     id={item.id}
+                    followed={item.followed}
                   />
                 </div>
               );

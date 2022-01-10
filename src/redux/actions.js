@@ -1,17 +1,16 @@
 import axios from "axios";
 import httpServise from "../app/services/httpServices";
 import {
-  // FOLLOW,
+  FOLLOW,
   HIDE_LOADER,
   SET_MY_PROFILE,
   SET_STATUS,
-  // SET_CURRENT_PAGE,
   SET_USERS,
   SET_USERS_COUNT,
   SET_USER_DATA,
   SET_USER_PROFILE,
   SHOW_LOADER,
-  // UNFOLLOW,
+  UNFOLLOW,
 } from "./types";
 
 const http = axios.create({
@@ -144,29 +143,55 @@ export const hideLoader = () => ({
   type: HIDE_LOADER,
 });
 
-// export function follow(userId) {
-//   return async (dispatch) => {
-//     console.log(userId);
-//     try {
-//       const { data } = await httpServise.post(`follow/${userId}`, {}, {});
-//       console.log(data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// }
+export function followSucsess(userId) {
+  return { type: FOLLOW, userId };
+}
 
-// export const unfollow = (id) => ({
-//   action: UNFOLLOW,
-//   userId: id,
-// });
+export function follow(userId) {
+  return async (dispatch) => {
+    try {
+      const { data } = await http.post(
+        `follow/${userId}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      if (data.resultCode === 0) {
+        dispatch(followSucsess(userId));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function unfollowSucsess(userId) {
+  return { type: UNFOLLOW, userId };
+}
+
+export const unfollow = (userId) => (dispatch) => {
+  try {
+    const { data } = http.delete(`follow/${userId}`, {
+      withCredentials: true,
+    });
+    if (data.resultCode === 0) {
+      dispatch(unfollowSucsess(userId));
+    }
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
 export function getUsers(currentPage = 1, pageSize = 5) {
   return async (dispatch) => {
     dispatch(showLoader());
     try {
       const { data } = await httpServise.get(
-        `users?page=${currentPage}&count=${pageSize}`
+        `users?page=${currentPage}&count=${pageSize}`,
+        {
+          withCredentials: true,
+        }
       );
       dispatch(setUsersCount(data.totalCount));
       dispatch(setUsers(data.items));
