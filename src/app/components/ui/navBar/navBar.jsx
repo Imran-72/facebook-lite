@@ -1,12 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { SideBarWrap } from "./sideBarWrap";
 
 const NavBar = () => {
+  const { isAuth } = useSelector((state) => state.authR);
   return (
     <SideBarWrap>
       <ul style={{ listStyleType: "none", padding: 0 }}>
-        <Link to="/profile">
+        <Link to={isAuth ? "/profile" : "/login"}>
           <li>Profile</li>
         </Link>
         <li>Message</li>

@@ -19,7 +19,7 @@ const Paginator = ({
   let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
   let rigthPortionPageNumber = portionNumber * portionSize;
   return (
-    <nav>
+    <nav role="button">
       <ul className="pagination">
         {portionNumber > 1 && (
           <li className="page-item">

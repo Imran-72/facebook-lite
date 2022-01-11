@@ -18,10 +18,16 @@ const Profile = ({ myProfile, status }) => {
             height="300"
             className="img-responsive rounded-circle"
           />
-          <ul style={{ listStyleType: "none" }}>
-            <li>{myProfile.fullName}</li>
-            <li>22 года</li>
-          </ul>
+          <div className="d-flex">
+            <span className="mx-5">
+              <h4>{myProfile.fullName}</h4>
+            </span>
+            <span>
+              <button className="btn btn-primary mx-5">
+                Редактировать профиль
+              </button>
+            </span>
+          </div>
         </div>
         <div>
           <ProfileStatus status={status} />

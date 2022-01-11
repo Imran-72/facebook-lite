@@ -2,27 +2,30 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Profile from "./profile";
 import { getUserStatus } from "../../../redux/actions";
-import { ProfileWrap } from "./profileWrap";
+import { useHistory } from "react-router-dom";
 
 const ProfileContainer = () => {
+  // const params = useParams();
+  const { location } = useHistory();
+  console.log(location.pathname);
   const dispatch = useDispatch();
-  const { login, userId } = useSelector((state) => state.authR);
+  const { userId, isAuth } = useSelector((state) => state.authR);
   const { myProfile, status } = useSelector((state) => state.profR);
+  console.log(myProfile);
 
   useEffect(() => {
     dispatch(getUserStatus(userId));
-    // dispatch(getMyProfile(userId));
   }, [myProfile]);
+
+  // useEffect(() => {
+  //   if (isAuth === false) {
+  //     <Redirect to="/login" />;
+  //   }
+  // }, [isAuth]);
 
   return (
     <>
-      {login ? (
-        <Profile myProfile={myProfile} login={login} status={status} />
-      ) : (
-        <ProfileWrap>
-          <h3>Вы не авторизованы</h3>
-        </ProfileWrap>
-      )}
+      <Profile myProfile={myProfile} status={status} />
     </>
   );
 };

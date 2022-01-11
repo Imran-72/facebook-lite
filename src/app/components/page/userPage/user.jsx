@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { follow, unfollow } from "../../../../redux/actions";
@@ -7,13 +6,10 @@ import { follow, unfollow } from "../../../../redux/actions";
 const User = ({ name, id, followed }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(followed);
-  }, [followed]);
   return (
     <>
-      <Link to={`/userProfile/${id}`}>
-        <div className="m-3">
+      <div className="m-3">
+        <Link to={`/userProfile/${id}`}>
           <img
             src={`https://avatars.dicebear.com/api/avataaars/${(
               Math.random() + 1
@@ -24,9 +20,10 @@ const User = ({ name, id, followed }) => {
             height="70"
             className="img-responsive rounded-circle"
           />
-          <p>{name}</p>
-        </div>
-      </Link>
+        </Link>
+        <h5>{name}</h5>
+      </div>
+
       <div>
         {followed ? (
           <button

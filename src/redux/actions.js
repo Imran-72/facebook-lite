@@ -27,6 +27,10 @@ export function login({ email, password, rememberMe = true }) {
         rememberMe,
       });
       dispatch(getAuthUserData());
+      localStorage.setItem(
+        "userLogin",
+        JSON.stringify({ email, password, rememberMe })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -100,6 +104,7 @@ export function logout() {
     try {
       await http.delete(`auth/login`);
       dispatch(setAuthUserData(null, null, null, false));
+      localStorage.clear();
     } catch (error) {
       console.log(error);
     }

@@ -1,9 +1,17 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ProfileWrap } from "../../../profile/profileWrap";
+import { follow, unfollow } from "../../../../../redux/actions";
 
 const UserProfile = () => {
-  const { name, status } = useSelector((state) => state.profUserR.user);
+  const { name, status, id, followed } = useSelector(
+    (state) => state.profUserR.user
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(followed);
+  }, [followed]);
 
   return (
     <>
@@ -22,11 +30,35 @@ const UserProfile = () => {
             width="300"
             height="300"
           />
-          <ul style={{ listStyleType: "none" }}>
+          {/* <ul style={{ listStyleType: "none" }}>
             <li>
               <b> {name}</b>
+              <b> {name}</b>
             </li>
-          </ul>
+          </ul> */}
+          <div>
+            <span>{name}</span>
+            <span className="mx-5">
+              <button className="btn btn-primary">отправить сообщение</button>
+            </span>
+            <span>
+              {followed ? (
+                <button
+                  className="btn btn-primary mb-2"
+                  onClick={() => dispatch(unfollow(id))}
+                >
+                  UNFOLLOW
+                </button>
+              ) : (
+                <button
+                  className="btn btn-primary mb-2"
+                  onClick={() => dispatch(follow(id))}
+                >
+                  FOLLOW
+                </button>
+              )}
+            </span>
+          </div>
         </div>
         <div>
           <b> {status ? status : "Нет статуса"}</b>

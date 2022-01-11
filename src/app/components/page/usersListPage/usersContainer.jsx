@@ -36,6 +36,7 @@ const UsersContainer = () => {
         ) : (
           <>
             {usersCrop.map((item) => {
+              console.log(item);
               return (
                 <div onClick={() => dispatch(setUser(item))}>
                   <User

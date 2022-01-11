@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Header />
       </div>
-      <Redirect to="/" />
+      <Redirect to="/login" />
     </>
   );
 }
