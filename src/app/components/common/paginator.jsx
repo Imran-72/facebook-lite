@@ -41,6 +41,7 @@ const Paginator = ({
             return (
               <li
                 className={"page-item " + (p === currentPage ? "active" : "")}
+                key={p}
               >
                 <a
                   className="page-link"

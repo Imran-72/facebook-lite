@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { UsersWrap } from "./usersWrap";
 import { useDispatch } from "react-redux";
-import { getUsers, setUser } from "../../../../redux/actions";
+import { getUsers, setUserProfile } from "../../../../redux/actions";
 import { paginate } from "../../../utils/paginate";
 import Paginator from "../../common";
 import { useEffect } from "react";
@@ -36,10 +36,10 @@ const UsersContainer = () => {
         ) : (
           <>
             {usersCrop.map((item) => {
-              console.log(item);
               return (
-                <div onClick={() => dispatch(setUser(item))}>
+                <div onClick={() => dispatch(setUserProfile(item.id))}>
                   <User
+                    key={item.id}
                     photo={item.photos.large}
                     name={item.name}
                     id={item.id}

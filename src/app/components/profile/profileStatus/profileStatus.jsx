@@ -20,12 +20,13 @@ const ProfileStatus = ({ status }) => {
   const handleStatusChange = (e) => {
     dispatch(setStatus(e.currentTarget.value));
   };
+
   return (
     <div>
       {!editMode && (
-        <div>
+        <div className="mx-4">
           <span onDoubleClick={activateEditMode} role="button">
-            {status || "------"}
+            <h5>{status || "------"}</h5>
           </span>
         </div>
       )}

@@ -7,8 +7,11 @@ import UserProfile from "./components/page/userPage/userProfile";
 import UsersContainer from "./components/page/usersListPage";
 import NavBar from "./components/ui/navBar";
 import ProfileContainer from "./components/profile/profileContainer";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
+  const { location } = useHistory();
+  const path = location.pathname;
   return (
     <>
       <div className="d-flex">
@@ -20,7 +23,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Header />
       </div>
-      <Redirect to="/login" />
+      <Redirect to={path} />
     </>
   );
 }

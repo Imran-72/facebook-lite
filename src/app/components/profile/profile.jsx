@@ -14,8 +14,8 @@ const Profile = ({ myProfile, status }) => {
               .toString(36)
               .substring(7)}.svg`}
             alt="avatar"
-            width="300"
-            height="300"
+            width="150"
+            height="150"
             className="img-responsive rounded-circle"
           />
           <div className="d-flex">

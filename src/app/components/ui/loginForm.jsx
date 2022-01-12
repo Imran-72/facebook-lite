@@ -100,7 +100,6 @@ const LoginForm = () => {
                     className="btn btn-primary w-100 mx-auto"
                     type="submit"
                     disabled={!isValid}
-                    // onClick={() => dispatch(getAuthUserData(data))}
                     onClick={() => dispatch(login(data))}
                   >
                     Submit

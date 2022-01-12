@@ -4,14 +4,17 @@ import { ProfileWrap } from "../../../profile/profileWrap";
 import { follow, unfollow } from "../../../../../redux/actions";
 
 const UserProfile = () => {
-  const { name, status, id, followed } = useSelector(
-    (state) => state.profUserR.user
-  );
+  const {
+    fullName: name,
+    status,
+    id,
+    followed,
+  } = useSelector((state) => state.profUserR.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(followed);
-  }, [followed]);
+  // useEffect(() => {
+  //   console.log(followed);
+  // }, [followed]);
 
   return (
     <>
@@ -27,17 +30,13 @@ const UserProfile = () => {
             alt=""
             className="img-responsive rounded-circle"
             alt="avatar"
-            width="300"
-            height="300"
+            width="150"
+            height="150"
           />
-          {/* <ul style={{ listStyleType: "none" }}>
-            <li>
-              <b> {name}</b>
-              <b> {name}</b>
-            </li>
-          </ul> */}
-          <div>
-            <span>{name}</span>
+          <div className="d-flex mx-4">
+            <span>
+              <h4>{name}</h4>
+            </span>
             <span className="mx-5">
               <button className="btn btn-primary">отправить сообщение</button>
             </span>
@@ -60,7 +59,7 @@ const UserProfile = () => {
             </span>
           </div>
         </div>
-        <div>
+        <div className="mx-4">
           <b> {status ? status : "Нет статуса"}</b>
         </div>
       </ProfileWrap>

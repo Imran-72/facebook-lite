@@ -18,7 +18,7 @@ const http = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
 });
 
-export function login({ email, password, rememberMe = true }) {
+export function login({ email = "email", password, rememberMe = true }) {
   return async (dispatch) => {
     try {
       await http.post(`auth/login`, {
@@ -58,6 +58,7 @@ function getMyProfile(userId) {
   return async (dispatch) => {
     try {
       const { data } = await http.get(`/profile/${userId}`);
+      console.log(data);
       dispatch({
         type: SET_MY_PROFILE,
         payload: data,
@@ -150,10 +151,17 @@ function setUsers(data) {
   };
 }
 
-export function setUser(data) {
-  return {
-    type: SET_USER_PROFILE,
-    payload: data,
+export function setUserProfile(userId) {
+  return async (dispatch) => {
+    try {
+      const { data } = await http.get(`/profile/${userId}`);
+      dispatch({
+        type: SET_USER_PROFILE,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
