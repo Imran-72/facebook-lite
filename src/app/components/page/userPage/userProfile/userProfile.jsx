@@ -1,27 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ProfileWrap } from "../../../profile/profileWrap";
-import { follow, unfollow } from "../../../../../redux/actions";
+import { follow, setUserProfile, unfollow } from "../../../../../redux/actions";
 
 const UserProfile = () => {
+  const dispatch = useDispatch();
   const {
     fullName: name,
     status,
-    id,
+    userId: id,
     followed,
   } = useSelector((state) => state.profUserR.user);
-  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   console.log(followed);
-  // }, [followed]);
+  useEffect(() => {
+    const userID = localStorage.getItem("user-profile");
+    if (!id) {
+      setTimeout(() => {
+        dispatch(setUserProfile(userID));
+      }, 100);
+    }
+  }, [id]);
 
   return (
     <>
       <ProfileWrap>
         <div className="d-flex m-2">
           <img
-            // src={ava.large ? ava.large : img}
             src={`https://avatars.dicebear.com/api/avataaars/${(
               Math.random() + 1
             )

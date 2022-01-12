@@ -155,6 +155,7 @@ export function setUserProfile(userId) {
   return async (dispatch) => {
     try {
       const { data } = await http.get(`/profile/${userId}`);
+      localStorage.setItem("user-profile", data.userId);
       dispatch({
         type: SET_USER_PROFILE,
         payload: data,
