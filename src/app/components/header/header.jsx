@@ -19,7 +19,7 @@ const Header = () => {
             role="button"
             onClick={() => dispatch(logout())}
           >
-            Logout
+            <Link to="/login">Logout</Link>
           </div>
         ) : (
           <Link to="/login" style={{ textDecoration: "none", color: "black" }}>

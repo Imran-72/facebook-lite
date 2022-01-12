@@ -105,7 +105,7 @@ export function logout() {
     try {
       await http.delete(`auth/login`);
       dispatch(setAuthUserData(null, null, null, false));
-      localStorage.clear();
+      localStorage.removeItem("userLogin");
     } catch (error) {
       console.log(error);
     }

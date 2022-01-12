@@ -8,7 +8,7 @@ const NavBar = () => {
   return (
     <SideBarWrap>
       <ul style={{ listStyleType: "none", padding: 0 }}>
-        <Link to={isAuth ? "/profile" : "/login"}>
+        <Link to={!isAuth ? "/login" : "/profile"}>
           <li>Profile</li>
         </Link>
         <li>Message</li>
