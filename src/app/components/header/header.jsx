@@ -3,11 +3,13 @@ import { useDispatch } from "react-redux";
 import { HeaderWrap } from "./headerWrap";
 import { logout } from "../../../redux/actions";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector((state) => state.authR);
+  const history = useHistory();
+  console.log(history);
 
   return (
     <HeaderWrap>
@@ -19,7 +21,7 @@ const Header = () => {
             role="button"
             onClick={() => dispatch(logout())}
           >
-            <Link to="/login">Logout</Link>
+            <Link onClick={() => history.replace("/login")}>Logout</Link>
           </div>
         ) : (
           <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
