@@ -17,30 +17,35 @@ const ProfileStatus = ({ status }) => {
     dispatch(updateUserStatus(status));
   };
 
-  const handleStatusChange = (e) => {
-    dispatch(setStatus(e.currentTarget.value));
+  const handleStatusChange = ({ currentTarget }) => {
+    dispatch(setStatus(currentTarget.value));
   };
 
   return (
-    <div>
-      {!editMode && (
-        <div>
-          <span onDoubleClick={activateEditMode} role="button">
-            <b>{status || "------"}</b>
-          </span>
-        </div>
-      )}
-      {editMode && (
-        <div>
-          <input
-            autoFocus={true}
-            type="text"
-            value={status}
-            onChange={handleStatusChange}
-            onBlur={deActivateEditMode}
-          />
-        </div>
-      )}
+    <div className="row text-center">
+      <div
+        className="col-md-3 offset-md-2 shadow p-4"
+        style={{ marginTop: "20px" }}
+      >
+        {!editMode && (
+          <div>
+            <span onDoubleClick={activateEditMode} role="button">
+              <h5>{status || "-------------"}</h5>
+            </span>
+          </div>
+        )}
+        {editMode && (
+          <div>
+            <input
+              autoFocus={true}
+              type="text"
+              value={status}
+              onChange={handleStatusChange}
+              onBlur={deActivateEditMode}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

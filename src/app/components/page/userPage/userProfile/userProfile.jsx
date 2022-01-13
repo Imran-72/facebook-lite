@@ -25,8 +25,8 @@ const UserProfile = () => {
     <div className="container">
       <div className="row">
         <div
-          className="col-md-7 offset-md-3 shadow p-4"
-          style={{ marginTop: "150px" }}
+          className="col-md-8 offset-md-2 shadow p-4"
+          style={{ marginTop: "100px" }}
         >
           <div className="d-flex m-2">
             <img
@@ -36,19 +36,17 @@ const UserProfile = () => {
                 .toString(36)
                 .substring(7)}.svg`}
               alt=""
-              className="img-responsive rounded-circle"
+              className="img-responsive"
               alt="avatar"
               width="150"
               height="150"
             />
-            <div className="d-flex mx-4">
+            <div className="d-flex mx-5">
+              <h4 className="d-flex mx-5">{name}</h4>
               <span>
-                <h4>{name}</h4>
-              </span>
-              <span className="mx-5">
                 <button className="btn btn-primary">отправить сообщение</button>
               </span>
-              <span>
+              <span className="mx-5">
                 {followed ? (
                   <button
                     className="btn btn-primary mb-2"
@@ -67,9 +65,14 @@ const UserProfile = () => {
               </span>
             </div>
           </div>
-          <div className="mx-4">
-            <b> {status ? status : "Нет статуса"}</b>
-          </div>
+        </div>
+      </div>
+      <div className="row text-center">
+        <div
+          className="col-md-3 offset-md-2 shadow p-4"
+          style={{ marginTop: "20px" }}
+        >
+          <h5> {status ? status : "Нет статуса"}</h5>
         </div>
       </div>
     </div>

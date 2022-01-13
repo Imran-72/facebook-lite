@@ -4,20 +4,25 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { login } from "../../../redux/actions";
 import TextField from "../common/form";
+import CheckBoxField from "../common/form/checkBoxField";
 import { validator } from "../../utils/validator";
-import { UsersWrap } from "../../components/page/usersListPage/usersWrap";
-
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const [data, setData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
 
   const [errors, setErrors] = useState({});
+  // const [enterError, setEnterError] = useState(null);
 
-  const handleChange = ({ target }) => {
-    setData((prev) => ({
-      ...prev,
+  const handleChange = (target) => {
+    setData((prevState) => ({
+      ...prevState,
       [target.name]: target.value,
     }));
+    // setEnterError(null);
   };
 
   const validatorConfig = {
@@ -82,13 +87,13 @@ const LoginForm = () => {
         onChange={handleChange}
         error={errors.password}
       />
-      {/* <CheckBoxField
-                  onChange={handleChange}
-                  value={data.stayOn}
-                  name="stayOn"
-                >
-                  Оставаться в системе
-                </CheckBoxField> */}
+      <CheckBoxField
+        onChange={handleChange}
+        value={data.rememberMe}
+        name="rememberMe"
+      >
+        Оставаться в системе
+      </CheckBoxField>
       <Link to="/profile">
         <button
           className="btn btn-primary w-100 mx-auto"

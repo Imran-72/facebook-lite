@@ -27,8 +27,8 @@ const UsersContainer = () => {
 
   const usersCrop = paginate(users, currentPage, pageSize);
   return (
-    <div className="p-3">
-      <div style={{ marginTop: "80px" }}>
+    <div className="p-2">
+      <div style={{ marginTop: "70px" }}>
         {loading ? (
           <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>

@@ -18,7 +18,7 @@ const http = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
 });
 
-export function login({ email = "email", password, rememberMe = true }) {
+export function login({ email, password, rememberMe }) {
   return async (dispatch) => {
     try {
       await http.post(`auth/login`, {

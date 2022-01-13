@@ -5,7 +5,7 @@ const CheckBoxField = ({ name, value, onChange, children }) => {
     onChange({ name: name, value: !value });
   };
   return (
-    <div className="form-check">
+    <div className="form-check mb-2">
       <input
         className="form-check-input"
         type="checkbox"

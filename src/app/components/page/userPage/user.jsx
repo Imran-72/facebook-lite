@@ -7,8 +7,8 @@ const User = ({ name, id, followed }) => {
   const dispatch = useDispatch();
 
   return (
-    <>
-      <div className="m-3">
+    <div className="m-3 text-center" style={{ width: "150px" }}>
+      <div>
         <Link to={`/userProfile/${id}`}>
           <img
             src={`https://avatars.dicebear.com/api/avataaars/${(
@@ -23,7 +23,6 @@ const User = ({ name, id, followed }) => {
         </Link>
         <h5>{name}</h5>
       </div>
-
       <div>
         {followed ? (
           <button
@@ -41,7 +40,7 @@ const User = ({ name, id, followed }) => {
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
