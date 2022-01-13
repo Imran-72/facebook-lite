@@ -30,14 +30,14 @@ const User = ({ name, id, followed }) => {
             className="btn btn-primary mb-2"
             onClick={() => dispatch(unfollow(id))}
           >
-            UNFOLLOW
+            unfollow
           </button>
         ) : (
           <button
             className="btn btn-primary mb-2"
             onClick={() => dispatch(follow(id))}
           >
-            FOLLOW
+            follow
           </button>
         )}
       </div>

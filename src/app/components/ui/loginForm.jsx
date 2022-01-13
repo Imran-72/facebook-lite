@@ -65,52 +65,41 @@ const LoginForm = () => {
   };
 
   return (
-    <UsersWrap>
-      <div style={{ position: "absolute", left: "50px" }}>
-        <div className="container mt-5">
-          <div className="row">
-            <div className="col-md-12 offset-md-3 shadow p-4">
-              <h3 className="mb-4">Login</h3>
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  label="Электронная почта"
-                  type="text"
-                  name="email"
-                  value={data.email}
-                  onChange={handleChange}
-                  error={errors.email}
-                />
-                <TextField
-                  label="Пароль"
-                  type="password"
-                  name="password"
-                  value={data.password}
-                  onChange={handleChange}
-                  error={errors.password}
-                />
-                {/* <CheckBoxField
+    <form onSubmit={handleSubmit}>
+      <TextField
+        label="Электронная почта"
+        type="text"
+        name="email"
+        value={data.email}
+        onChange={handleChange}
+        error={errors.email}
+      />
+      <TextField
+        label="Пароль"
+        type="password"
+        name="password"
+        value={data.password}
+        onChange={handleChange}
+        error={errors.password}
+      />
+      {/* <CheckBoxField
                   onChange={handleChange}
                   value={data.stayOn}
                   name="stayOn"
                 >
                   Оставаться в системе
                 </CheckBoxField> */}
-                <Link to="/profile">
-                  <button
-                    className="btn btn-primary w-100 mx-auto"
-                    type="submit"
-                    disabled={!isValid}
-                    onClick={() => dispatch(login(data))}
-                  >
-                    Submit
-                  </button>
-                </Link>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </UsersWrap>
+      <Link to="/profile">
+        <button
+          className="btn btn-primary w-100 mx-auto"
+          type="submit"
+          disabled={!isValid}
+          onClick={() => dispatch(login(data))}
+        >
+          Submit
+        </button>
+      </Link>
+    </form>
   );
 };
 

@@ -24,9 +24,9 @@ const ProfileStatus = ({ status }) => {
   return (
     <div>
       {!editMode && (
-        <div className="mx-4">
+        <div>
           <span onDoubleClick={activateEditMode} role="button">
-            <h5>{status || "------"}</h5>
+            <b>{status || "------"}</b>
           </span>
         </div>
       )}

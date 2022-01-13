@@ -4,36 +4,43 @@ import ProfileStatus from "./profileStatus/profileStatus";
 
 const Profile = ({ myProfile, status }) => {
   return (
-    <ProfileWrap>
-      <>
-        <div className="d-flex m-2">
-          <img
-            src={`https://avatars.dicebear.com/api/avataaars/${(
-              Math.random() + 1
-            )
-              .toString(36)
-              .substring(7)}.svg`}
-            alt="avatar"
-            width="150"
-            height="150"
-            className="img-responsive rounded-circle"
-          />
+    <div className="container">
+      <div className="row">
+        <div
+          className="col-md-6 offset-md-3 shadow p-4"
+          style={{ marginTop: "150px" }}
+        >
           <div className="d-flex">
-            <span className="mx-5">
-              <h4>{myProfile.fullName}</h4>
-            </span>
-            <span>
-              <button className="btn btn-primary mx-5">
-                Редактировать профиль
-              </button>
-            </span>
+            <div>
+              <img
+                src={`https://avatars.dicebear.com/api/avataaars/${(
+                  Math.random() + 1
+                )
+                  .toString(36)
+                  .substring(7)}.svg`}
+                alt="avatar"
+                width="150"
+                height="150"
+                className="img-responsive rounded-circle"
+              />
+              <div className="mt-3 mx-4">
+                <ProfileStatus status={status} />
+              </div>
+            </div>
+            <div className="d-flex">
+              <span className="mx-5">
+                <h4>{myProfile.fullName}</h4>
+              </span>
+              <span>
+                <button className="btn btn-primary mx-5">
+                  Редактировать профиль
+                </button>
+              </span>
+            </div>
           </div>
         </div>
-        <div>
-          <ProfileStatus status={status} />
-        </div>
-      </>
-    </ProfileWrap>
+      </div>
+    </div>
   );
 };
 

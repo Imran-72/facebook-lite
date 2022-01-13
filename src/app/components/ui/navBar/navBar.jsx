@@ -1,24 +1,42 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { SideBarWrap } from "./sideBarWrap";
+import { Link, useHistory } from "react-router-dom";
+import NavProfile from "../navBar/navProfile";
+import { NavBarWrap } from "./navBarWrap";
 
 const NavBar = () => {
   const { isAuth } = useSelector((state) => state.authR);
+  const history = useHistory();
+  console.log(history);
+
   return (
-    <SideBarWrap>
-      <ul style={{ listStyleType: "none", padding: 0 }}>
-        <Link to={!isAuth ? "/login" : "/profile"}>
-          <li>Profile</li>
-        </Link>
-        <li>Message</li>
-        <Link to="/users">
-          <li>Users</li>
-        </Link>
-        <li>Music</li>
-        <li>Settings</li>
-      </ul>
-    </SideBarWrap>
+    <NavBarWrap>
+      <div className="navbar bg-light mb-3">
+        <div className="container-fluid">
+          <ul className="nav">
+            <li className="nav-item">
+              <Link className="nav-link " aria-current="page" to="/">
+                company
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link " aria-current="page" to="/users">
+                users
+              </Link>
+            </li>
+          </ul>
+          <div className="d-flex">
+            {isAuth ? (
+              <NavProfile />
+            ) : (
+              <Link className="nav-link " aria-current="page" to="/login">
+                login
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </NavBarWrap>
   );
 };
 

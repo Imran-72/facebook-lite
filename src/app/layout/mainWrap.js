@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const ProfileWrap = styled.div`
-  width: 1300px;
+export const MainWrap = styled.div`
   height: 400px;
   box-sizing: border-box;
   margin: 0;
