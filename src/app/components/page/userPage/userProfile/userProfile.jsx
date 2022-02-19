@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ProfileWrap } from "../../../profile/profileWrap";
-import { follow, setUserProfile, unfollow } from "../../../../../redux/actions";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { follow, setUserProfile, unfollow } from '../../../../../redux/actions';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -9,11 +8,14 @@ const UserProfile = () => {
     fullName: name,
     status,
     userId: id,
-    followed,
   } = useSelector((state) => state.profUserR.user);
+  const followed = useSelector((state) =>
+    state.usersR.users.map((item) => item.followed)
+  );
+  console.log(followed);
 
   useEffect(() => {
-    const userID = localStorage.getItem("user-profile");
+    const userID = localStorage.getItem('user-profile');
     if (!id) {
       setTimeout(() => {
         dispatch(setUserProfile(userID));
@@ -26,7 +28,7 @@ const UserProfile = () => {
       <div className="row">
         <div
           className="col-md-8 offset-md-2 shadow p-4"
-          style={{ marginTop: "100px" }}
+          style={{ marginTop: '100px' }}
         >
           <div className="d-flex m-2">
             <img
@@ -35,7 +37,6 @@ const UserProfile = () => {
               )
                 .toString(36)
                 .substring(7)}.svg`}
-              alt=""
               className="img-responsive"
               alt="avatar"
               width="150"
@@ -70,9 +71,9 @@ const UserProfile = () => {
       <div className="row text-center">
         <div
           className="col-md-3 offset-md-2 shadow p-4"
-          style={{ marginTop: "20px" }}
+          style={{ marginTop: '20px' }}
         >
-          <h5> {status ? status : "Нет статуса"}</h5>
+          <h5> {status ? status : 'Нет статуса'}</h5>
         </div>
       </div>
     </div>

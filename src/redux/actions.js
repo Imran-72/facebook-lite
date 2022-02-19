@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   FOLLOW,
   HIDE_LOADER,
@@ -10,13 +10,24 @@ import {
   SET_USER_PROFILE,
   SHOW_LOADER,
   UNFOLLOW,
-} from "./types";
+} from './types';
 
 const http = axios.create({
   withCredentials: true,
-  headers: { "API-KEY": "fc78ffee-d447-4b9a-b481-18f5fb9e7074" },
-  baseURL: "https://social-network.samuraijs.com/api/1.0/",
+  headers: { 'API-KEY': 'fc78ffee-d447-4b9a-b481-18f5fb9e7074' },
+  baseURL: 'https://social-network.samuraijs.com/api/1.0/',
 });
+
+// export function signUp({ email, password, ...rest }) {
+//   const url = `accounts:signUp`;
+//   return async (dispatch) => {
+//     const { data } = await httpAuth.post(url, {
+//       email,
+//       password,
+//     });
+//     console.log(data);
+//   };
+// }
 
 export function login({ email, password, rememberMe }) {
   return async (dispatch) => {
@@ -28,7 +39,7 @@ export function login({ email, password, rememberMe }) {
       });
       dispatch(getAuthUserData());
       localStorage.setItem(
-        "userLogin",
+        'userLogin',
         JSON.stringify({ email, password, rememberMe })
       );
     } catch (error) {
@@ -105,7 +116,7 @@ export function logout() {
     try {
       await http.delete(`auth/login`);
       dispatch(setAuthUserData(null, null, null, false));
-      localStorage.removeItem("userLogin");
+      localStorage.removeItem('userLogin');
     } catch (error) {
       console.log(error);
     }
@@ -145,6 +156,8 @@ function setUsersCount(usersCount) {
 }
 
 function setUsers(data) {
+  console.log(data);
+
   return {
     type: SET_USERS,
     payload: data,
@@ -155,7 +168,7 @@ export function setUserProfile(userId) {
   return async (dispatch) => {
     try {
       const { data } = await http.get(`/profile/${userId}`);
-      localStorage.setItem("user-profile", data.userId);
+      localStorage.setItem('user-profile', data.userId);
       dispatch({
         type: SET_USER_PROFILE,
         payload: data,
@@ -193,7 +206,7 @@ export function unfollow(userId) {
         });
       }
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 }

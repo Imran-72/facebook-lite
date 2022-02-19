@@ -1,3 +1,4 @@
 {
-  "apiEndpoint": "https://social-network.samuraijs.com/api/1.0/"
+  "apiEndpoint": "https://facebook-lite-f57c2-default-rtdb.europe-west1.firebasedatabase.app/",
+  "isFirebase": true
 }

@@ -7,7 +7,6 @@ import { NavBarWrap } from "./navBarWrap";
 const NavBar = () => {
   const { isAuth } = useSelector((state) => state.authR);
   const history = useHistory();
-  console.log(history);
 
   return (
     <NavBarWrap>
